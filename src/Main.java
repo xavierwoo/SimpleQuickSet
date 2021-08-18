@@ -81,7 +81,7 @@ public class Main {
     public static void test_simple_set(int max_index, ArrayList<Test> data, ArrayList<Test> request){
         //Test SimpleSet
         long start_t = System.currentTimeMillis();
-        SQSet set = new SQSet(max_index);
+        SQSet<Test> set = new SQSet<>(max_index);
         for(var t : data){
             set.add(t);
         }

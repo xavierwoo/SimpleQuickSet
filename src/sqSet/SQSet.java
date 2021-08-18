@@ -5,16 +5,16 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class SQSet {
+public class SQSet<T extends SQSetElement> {
     final private int[] hash_set;
-    final private ArrayList<SQSetElement> list = new ArrayList<>();
+    final private ArrayList<T> list = new ArrayList<>();
 
     public SQSet(int max_index){
         hash_set = new int[max_index+1];
         Arrays.fill(hash_set, -1);
     }
 
-    public void add(SQSetElement obj){
+    public void add(T obj){
         var key = obj.getSQSetKey();
         if(key >= hash_set.length){
             throw new Error("Set capacity is not enough");
@@ -25,10 +25,6 @@ public class SQSet {
             hash_set[key] = list.size();
             list.add(obj);
         }
-    }
-
-    public List<SQSetElement> getSetAsList(){
-        return Collections.unmodifiableList(list);
     }
 
     public void remove(int key){
@@ -42,11 +38,11 @@ public class SQSet {
         }
     }
 
-    public void remove(SQSetElement obj){
+    public void remove(T obj){
         remove(obj.getSQSetKey());
     }
 
-    public List<SQSetElement> valueList(){
+    public List<T> valueList(){
         return Collections.unmodifiableList(list);
     }
 
@@ -54,7 +50,7 @@ public class SQSet {
         return list.size();
     }
 
-    public boolean contains(SQSetElement o){
+    public boolean contains(T o){
         return hash_set[o.getSQSetKey()] != -1;
     }
 
