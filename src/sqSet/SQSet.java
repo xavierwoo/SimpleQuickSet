@@ -27,6 +27,10 @@ public class SQSet {
         }
     }
 
+    public List<SQSetElement> getSetAsList(){
+        return Collections.unmodifiableList(list);
+    }
+
     public void remove(int key){
         if(hash_set[key] != -1){
             var last_elem = list.get(list.size()-1);
@@ -52,5 +56,17 @@ public class SQSet {
 
     public boolean contains(SQSetElement o){
         return hash_set[o.getSQSetKey()] != -1;
+    }
+
+    public boolean equals(SQSet o){
+        if(size() != o.size()){
+            return false;
+        }
+        for(var elem : list){
+            if(!o.contains(elem)){
+                return false;
+            }
+        }
+        return true;
     }
 }
